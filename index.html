@@ -1,10 +1,123 @@
+
 <!DOCTYPE html>
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>Hello GitHub Pages</title>
+  <title>Nebula Pulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Vazir', sans-serif;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #00f0ff, #ff00cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { text-shadow: 0 0 10px #00f0ff; }
+      to { text-shadow: 0 0 20px #ff00cc; }
+    }
+
+    .typing {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #fff;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+  </style>
 </head>
 <body>
-  <h1>سلام 👋 سایت شما فعال شد ✅</h1>
+  <canvas id="stars"></canvas>
+  <div class="center">
+    <h1>Nebula Pulse</h1>
+    <div class="typing">جایی برای خلاقیت، جسارت و تجربه‌های بی‌مرز...</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5,
+        d: Math.random() * 1
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#fff';
+      for (let i = 0; i < stars.length; i++) {
+        let s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function animateStars() {
+      for (let i = 0; i < stars.length; i++) {
+        let s = stars[i];
+        s.y += s.d;
+        if (s.y > canvas.height) {
+          s.y = 0;
+          s.x = Math.random() * canvas.width;
+        }
+      }
+      drawStars();
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+  </script>
 </body>
 </html>
