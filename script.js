@@ -1,24 +1,5 @@
-const permsToCheck = [
-  'geolocation', 'notifications', 'camera', 'microphone',
-  'clipboard-read', 'clipboard-write', 'persistent-storage'
-];
-
 function log(msg) {
   console.log(msg);
-}
-
-async function probeAll() {
-  const container = document.getElementById('permList');
-  for (const name of permsToCheck) {
-    try {
-      const result = await navigator.permissions.query({ name });
-      const div = document.createElement('div');
-      div.textContent = `${name}: ${result.state}`;
-      container.appendChild(div);
-    } catch (e) {
-      container.innerHTML += `<div>${name}: پشتیبانی نمی‌شود</div>`;
-    }
-  }
 }
 
 function requestGeo() {
@@ -48,4 +29,49 @@ function exportStatus() {
   URL.revokeObjectURL(url);
 }
 
-window.onload = probeAll;
+async function showSystemInfo() {
+  const output = document.getElementById('infoOutput');
+  output.innerHTML = "<strong>در حال بررسی...</strong><br>";
+
+  output.innerHTML += `🧠 User Agent: ${navigator.userAgent}<br>`;
+  output.innerHTML += `🌐 زبان مرورگر: ${navigator.language}<br>`;
+  output.innerHTML += `📱 پلتفرم: ${navigator.platform}<br>`;
+  output.innerHTML += `📏 اندازه صفحه: ${window.innerWidth}x${window.innerHeight}<br>`;
+  output.innerHTML += `📡 آنلاین هست؟ ${navigator.onLine ? "بله" : "خیر"}<br>`;
+
+  try {
+    const ipRes = await fetch("https://api.ipify.org?format=json");
+    const ipData = await ipRes.json();
+    output.innerHTML += `🌍 IP عمومی: ${ipData.ip}<br>`;
+  } catch {
+    output.innerHTML += `🌍 IP عمومی: قابل دریافت نیست<br>`;
+  }
+
+  if ('getBattery' in navigator) {
+    try {
+      const battery = await navigator.getBattery();
+      output.innerHTML += `🔋 شارژ باتری: ${Math.round(battery.level * 100)}%<br>`;
+      output.innerHTML += `⚡ در حال شارژ: ${battery.charging ? "بله" : "خیر"}<br>`;
+    } catch {
+      output.innerHTML += `🔋 اطلاعات باتری: قابل دریافت نیست<br>`;
+    }
+  }
+
+  if ('connection' in navigator) {
+    const conn = navigator.connection;
+    output.innerHTML += `📶 نوع اتصال: ${conn.effectiveType}<br>`;
+    output.innerHTML += `📥 سرعت تقریبی: ${conn.downlink} Mbps<br>`;
+  } else {
+    output.innerHTML += `📶 اطلاعات اتصال: قابل دریافت نیست<br>`;
+  }
+
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillText('FingerprintTest', 2, 15);
+    const fp = canvas.toDataURL().substring(0, 80);
+    output.innerHTML += `🖼️ Canvas Fingerprint: ${fp}<br>`;
+  } catch {
+    output.innerHTML += `🖼️ Canvas Fingerprint: قابل دریافت نیست<br>`;
+  }
+}
