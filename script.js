@@ -11,7 +11,15 @@ function requestClipboard() {
 }
 
 function requestCamera() {
-  navigator.mediaDevices.getUserMedia({ video: true }).then(stream => log('دوربین فعال شد'));
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      log('دوربین فعال شد');
+      const video = document.getElementById('cameraView');
+      video.srcObject = stream;
+    })
+    .catch(err => {
+      log('خطا در دسترسی به دوربین: ' + err.message);
+    });
 }
 
 function exportStatus() {

@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>آینهٔ دسترسی‌های مرورگر</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>آینهٔ دسترسی‌های مرورگر</h1>
-    <p>بررسی، درخواست و نمایش وضعیت مجوزها</p>
+    <p>بررسی، درخواست و نمایش وضعیت مجوزها و اطلاعات سیستم</p>
   </header>
 
   <main>
@@ -22,6 +23,7 @@
       <button onclick="requestGeo()">موقعیت</button>
       <button onclick="requestClipboard()">کلیپ‌بورد</button>
       <button onclick="requestCamera()">دوربین</button>
+      <video id="cameraView" autoplay playsinline width="320" height="240" style="margin-top:10px;"></video>
     </section>
 
     <section id="systemInfo">

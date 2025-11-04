@@ -22,3 +22,7 @@ button {
 section {
   margin-bottom: 30px;
 }
+video {
+  border: 2px solid #38bdf8;
+  border-radius: 8px;
+}
