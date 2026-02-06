@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>آینهٔ دسترسی‌های مرورگر - نسخه پیشرفته</title>
+  <meta name="description" content="بررسی و نمایش وضعیت مجوزها و اطلاعات سیستم مرورگر">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- فونت فارسی Vazirmatn -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  
+  <!-- استایل جدید -->
+  <link rel="stylesheet" href="style-v2.css">
+  
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#667eea">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="آینهٔ دسترسی‌های مرورگر">
+  <meta property="og:description" content="بررسی و نمایش وضعیت مجوزها و اطلاعات سیستم مرورگر">
+  <meta property="og:image" content="https://shahryaar3590.github.io/og-image.png">
+  <meta property="og:url" content="https://shahryaar3590.github.io">
+</head>
+<body>
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+  
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+  
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">آینهٔ دسترسی‌های مرورگر</h1>
+      <p class="subtitle">بررسی، درخواست و نمایش وضعیت مجوزها و اطلاعات سیستم</p>
+    </div>
+  </header>
+
+  <main class="main container">
+    <div class="grid">
+      <!-- بخش مجوزها -->
+      <section class="card permissions-card">
+        <h2 class="card-title">📱 مجوزها</h2>
+        <div id="permList" class="permissions-grid"></div>
+      </section>
+
+      <!-- بخش درخواست‌ها -->
+      <section class="card actions-card">
+        <h2 class="card-title">🚀 درخواست‌ها</h2>
+        <div class="actions-grid">
+          <button class="btn btn-primary" onclick="requestGeo()">
+            <span class="btn-icon">📍</span>
+            موقعیت مکانی
+          </button>
+          <button class="btn btn-secondary" onclick="requestClipboard()">
+            <span class="btn-icon">📋</span>
+            دسترسی کلیپ‌بورد
+          </button>
+          <button class="btn btn-success" onclick="requestCamera()">
+            <span class="btn-icon">📷</span>
+            دسترسی دوربین
+          </button>
+        </div>
+        <div class="camera-preview">
+          <video id="cameraView" autoplay playsinline width="320" height="240"></video>
+          <button class="btn btn-danger" onclick="stopCamera()" style="margin-top: 10px;">
+            توقف دوربین
+          </button>
+        </div>
+      </section>
+
+      <!-- بخش اطلاعات سیستم -->
+      <section class="card info-card">
+        <h2 class="card-title">💻 اطلاعات سیستم</h2>
+        <button class="btn btn-info" onclick="showSystemInfo()">
+          <span class="btn-icon">🔍</span>
+          بررسی سیستم من
+        </button>
+        <div class="info-output">
+          <pre id="infoOutput"></pre>
+        </div>
+      </section>
+
+      <!-- بخش صادرات -->
+      <section class="card export-card">
+        <h2 class="card-title">📤 صادرات</h2>
+        <div class="export-buttons">
+          <button class="btn btn-warning" onclick="exportTo('json')">
+            JSON
+          </button>
+          <button class="btn btn-warning" onclick="exportTo('txt')">
+            TXT
+          </button>
+          <button class="btn btn-warning" onclick="exportTo('csv')">
+            CSV
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>ساخته شده با ❤️ توسط <a href="https://github.com/Shahryaar3590" target="_blank">shahryaar3590</a></p>
+      <p class="footer-links">
+        <a href="index.html">نسخه ساده</a> | 
+        <a href="index-v2.html">نسخه پیشرفته</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- اسکریپت جدید -->
+  <script src="script-v2.js"></script>
+  
+  <!-- بارگذاری Service Worker برای PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
