@@ -6,14 +6,17 @@ let currentTheme = localStorage.getItem('theme') || 'light';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded - starting initialization...");
     // تم تاریک
     initDarkMode();
     
     // بررسی مجوزها
     checkAllPermissions();
+    console.log("Checking permissions...");
     
     // نمایش اطلاعات اولیه
     showSystemInfo();
+    console.log("Showing system info...");
     
     // رویدادها
     document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
