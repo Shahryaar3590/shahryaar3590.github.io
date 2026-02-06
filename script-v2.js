@@ -169,35 +169,6 @@ function stopCamera() {
 }
 
 // نمایش اطلاعات سیستم
-function showSystemInfo() {
-    const info = {
-        'User Agent': navigator.userAgent,
-        'Platform': navigator.platform,
-        'Language': navigator.language,
-        'Cookies Enabled': navigator.cookieEnabled ? 'بله' : 'خیر',
-        'Online Status': navigator.onLine ? 'آنلاین' : 'آفلاین',
-        'Screen Resolution': `${screen.width} × ${screen.height}`,
-        'Color Depth': `${screen.colorDepth} بیت`,
-        'CPU Cores': navigator.hardwareConcurrency || 'نامشخص',
-        'Memory (approx)': (navigator.deviceMemory || 'نامشخص') + ' GB',
-        'Touch Support': navigator.maxTouchPoints > 0 ? 'بله' : 'خیر',
-        'Time Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
-        'Local Time': new Date().toLocaleString('fa-IR')
-    };
-    
-    const output = document.getElementById('infoOutput');
-    let html = '';
-    
-    for (const [key, value] of Object.entries(info)) {
-        html += `<strong>${key}:</strong> ${value}\n`;
-    }
-    
-    output.textContent = html;
-    showSuccess('اطلاعات سیستم بارگذاری شد');
-}
-
-// صادرات داده‌ها
-function exportTo(format) {
     const data = collectAllData();
     
     switch(format) {
@@ -340,3 +311,67 @@ function hideLoading(button, originalText) {
     button.innerHTML = originalText || button.getAttribute('data-original');
     button.disabled = false;
 }
+
+// نمایش اطلاعات سیستم (نسخه بهبود یافته)
+function showSystemInfo() {
+    const info = {
+        '👤 مرورگر': navigator.userAgent.split(') ')[0] + ')',
+        '💻 سیستم عامل': navigator.platform,
+        '🌍 زبان': navigator.language,
+        '🍪 کوکی‌ها': navigator.cookieEnabled ? '✅ فعال' : '❌ غیرفعال',
+        '📡 وضعیت اتصال': navigator.onLine ? '✅ آنلاین' : '❌ آفلاین',
+        '🖥️ رزولوشن صفحه': `${screen.width} × ${screen.height} پیکسل`,
+        '🎨 عمق رنگ': `${screen.colorDepth} بیت`,
+        '⚡ هسته‌های CPU': navigator.hardwareConcurrency || 'نامشخص',
+        '💾 حافظه (تقریبی)': (navigator.deviceMemory || 'نامشخص') + ' گیگابایت',
+        '👆 صفحه لمسی': navigator.maxTouchPoints > 0 ? '✅ دارد' : '❌ ندارد',
+        '🕐 منطقه زمانی': Intl.DateTimeFormat().resolvedOptions().timeZone,
+        '📅 زمان محلی': new Date().toLocaleString('fa-IR'),
+        '🔗 آدرس سایت': window.location.href
+    };
+    
+    const output = document.getElementById('infoOutput');
+    let html = '<div class="info-grid">';
+    
+    for (const [key, value] of Object.entries(info)) {
+        html += `
+            <div class="info-item">
+                <span class="info-key">${key}</span>
+                <span class="info-value">${value}</span>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    output.innerHTML = html;
+    showSuccess('✅ اطلاعات سیستم با موفقیت بارگذاری شد');
+}
+
+// اضافه کردن استایل برای نمایش بهتر
+const style = document.createElement('style');
+style.textContent = `
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .info-item {
+        background: rgba(0,0,0,0.05);
+        padding: 10px;
+        border-radius: 8px;
+        border-right: 4px solid #667eea;
+    }
+    .info-key {
+        font-weight: bold;
+        color: #4a5568;
+        display: block;
+    }
+    .info-value {
+        color: #2d3748;
+        display: block;
+        margin-top: 5px;
+        word-break: break-all;
+    }
+`;
+document.head.appendChild(style);
