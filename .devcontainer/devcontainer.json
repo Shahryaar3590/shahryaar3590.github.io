@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
   
   "postCreateCommand": {
-    "core-tools": "sudo apt-get update && sudo apt-get install -y jadx apktool mitmproxy tcpdump wireshark-common",
+    "core-tools": "sudo apt-get update && sudo apt-get install -y jadx apktool mitmproxy tcpdump",
     "python-libs": "pip install androguard frida-tools objection",
     "dex2jar": "sudo mkdir -p /opt/dex2jar && sudo wget -q -O /opt/dex2jar/dex-tools.zip https://github.com/pxb1988/dex2jar/releases/download/v2.4/dex-tools-2.4.zip && sudo unzip -q /opt/dex2jar/dex-tools.zip -d /opt/dex2jar && sudo rm /opt/dex2jar/dex-tools.zip && echo 'export PATH=\$PATH:/opt/dex2jar/dex-tools-2.4' >> ~/.bashrc",
     "mobsf": "docker pull opensecurity/mobile-security-framework-mobsf"
