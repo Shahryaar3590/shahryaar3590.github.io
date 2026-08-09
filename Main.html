@@ -1,402 +1,349 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Main — حریم خصوصی جامع در سند‌باکس مرورگر (پیشرفته)</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <meta name="color-scheme" content="light dark">
-  <style>
-    :root{--bg:#071226;--muted:rgba(255,255,255,0.68);--accent1:#7d5cff;--accent2:#00d1ff;--accent3:#00ffa3;--glass:rgba(255,255,255,0.04)}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Vazirmatn',system-ui,-apple-system,'Segoe UI',Roboto,Arial;direction:rtl;background:linear-gradient(180deg,#061025 0%,#071226 100%);color:#eef4ff}
-    .wrap{padding:28px;display:flex;align-items:flex-start;justify-content:center}
-    .frame{width:100%;max-width:1280px;border-radius:16px;padding:20px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));box-shadow:0 20px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent1),var(--accent2));font-weight:800}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:4px 0 0 0;color:var(--muted);font-size:13px}
-    .layout{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px}
-    .main-panel{padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
-    .controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .control{display:flex;gap:8px;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.01)}
-    .control button{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;padding:8px 10px;border-radius:8px;color:#061025;font-weight:700;cursor:pointer}
-    .log{margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.28);font-family:monospace;font-size:13px;color:var(--muted);max-height:420px;overflow:auto}
-    .side{padding:16px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:12px;height:100%}
-    .perm-list{display:flex;flex-direction:column;gap:8px}
-    .perm{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;background:rgba(0,0,0,0.18)}
-    .perm .meta{display:flex;gap:10px;align-items:center}
-    .chip{padding:6px 10px;border-radius:8px;font-weight:700}
-    .chip.granted{background:linear-gradient(90deg,var(--accent3),var(--accent2));color:#06261a}
-    .chip.denied{background:rgba(255,255,255,0.03);color:var(--muted)}
-    .perm button{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
-    .tips{font-size:13px;color:var(--muted);padding:8px;border-radius:8px;background:rgba(255,255,255,0.01)}
-    footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--muted);font-size:13px}
-    @media (max-width:980px){.layout{grid-template-columns:1fr}.side{order:2}}
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Main — حریم خصوصی جامع در سند‌باکس مرورگر (پیشرفته)</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="style-v2.css">
+    <style>
+        :root {
+            --bg: #071226;
+            --muted: rgba(255,255,255,0.68);
+            --accent1: #7d5cff;
+            --accent2: #00d1ff;
+            --accent3: #00ffa3;
+            --glass: rgba(255,255,255,0.04);
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+            direction: rtl;
+            background: linear-gradient(180deg, #061025 0%, #071226 100%);
+            color: #eef4ff;
+        }
+        .wrap { padding: 28px; display: flex; align-items: flex-start; justify-content: center; }
+        .frame {
+            width: 100%;
+            max-width: 1280px;
+            border-radius: 16px;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+        header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .brand { display: flex; gap: 12px; align-items: center; }
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            font-weight: 800;
+        }
+        h1 { margin: 0; font-size: 20px; }
+        p.lead { margin: 4px 0 0 0; color: var(--muted); font-size: 13px; }
+        .layout { display: grid; grid-template-columns: 1fr 420px; gap: 18px; margin-top: 18px; }
+        .main-panel {
+            padding: 18px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+        .control {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            padding: 12px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+            border: 1px solid rgba(255,255,255,0.01);
+        }
+        .control button {
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            border: none;
+            padding: 8px 10px;
+            border-radius: 8px;
+            color: #061025;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .log {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.28);
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--muted);
+            max-height: 420px;
+            overflow: auto;
+        }
+        .side {
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
+        }
+        .perm-list { display: flex; flex-direction: column; gap: 8px; }
+        .perm {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.18);
+        }
+        .perm .meta { display: flex; gap: 10px; align-items: center; }
+        .chip {
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        .chip.granted {
+            background: linear-gradient(90deg, var(--accent3), var(--accent2));
+            color: #06261a;
+        }
+        .chip.denied {
+            background: rgba(255,255,255,0.03);
+            color: var(--muted);
+        }
+        .perm button {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 6px 8px;
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+        }
+        .tips {
+            font-size: 13px;
+            color: var(--muted);
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.01);
+        }
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        @media (max-width: 980px) {
+            .layout { grid-template-columns: 1fr; }
+            .side { order: 2; }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="frame" role="main">
-      <header>
-        <div class="brand">
-          <div class="logo" aria-hidden="true">MN</div>
-          <div>
-            <h1>Main — جامع‌ترین کنترل دسترسی‌ها</h1>
-            <p class="lead">پوشش خواندنی/نوشتنی در سندباکس مرورگر — درخواست‌های تعاملی و گزارش‌گیری</p>
-          </div>
+    <div class="wrap">
+        <div class="frame" role="main">
+            <header>
+                <div class="brand">
+                    <div class="logo" aria-hidden="true">MN</div>
+                    <div>
+                        <h1>Main — جامع‌ترین کنترل دسترسی‌ها</h1>
+                        <p class="lead">پوشش خواندنی/نوشتنی در سندباکس مرورگر — درخواست‌های تعاملی و گزارش‌گیری</p>
+                    </div>
+                </div>
+                <div>
+                    <button id="exportBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer">صادرات JSON</button>
+                </div>
+            </header>
+
+            <div class="layout">
+                <section class="main-panel">
+                    <h3>ابزارها و تست‌های سندباکس — همهٔ دسترسی‌های قابل فکر</h3>
+                    <p style="color:var(--muted)">این پنل به صورت نمونه‌ای همهٔ عملیات خواندنی و نوشتنی که ممکن است در سندباکس مرورگر رخ دهند را امتحان می‌کند یا راهنمایی مرتبط را نمایش می‌دهد.</p>
+
+                    <div class="controls">
+                        <!-- Geolocation -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Geolocation</div><small>خواندن موقعیت</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqGeo">درخواست</button></div>
+                        </div>
+                        <!-- Camera / Microphone -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Camera / Microphone</div><small>استریم و توقف</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqCam">دوربین</button><button id="reqMic">میکروفون</button></div>
+                        </div>
+                        <!-- Clipboard -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Clipboard</div><small>خواندن و نوشتن</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="readClip">خواندن</button><button id="writeClip">نوشتن</button></div>
+                        </div>
+                        <!-- File System -->
+                        <div class="control">
+                            <div><div style="font-weight:700">File System Access</div><small>باز / ذخیره</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="openFile">باز کردن</button><button id="saveFile">ذخیره</button></div>
+                        </div>
+                        <!-- Notifications -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Notifications</div><small>درخواست و نمایش</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqNotif">درخواست</button><button id="showNotif">نمایش</button></div>
+                        </div>
+                        <!-- Storage -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Storage</div><small>نمایش و پاک‌سازی</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="showStorage">نمایش</button><button id="clearStorage">پاک‌سازی</button></div>
+                        </div>
+                        <!-- Sensors -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Sensors</div><small>Motion / Orientation</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqMotion">درخواست</button><button id="stopMotion">توقف</button></div>
+                        </div>
+                        <!-- Fingerprinting -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Fingerprinting</div><small>Canvas / Audio</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="showFP">محاسبه</button><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="maskSensitive"> مخفی‌سازی</label></div>
+                        </div>
+                        <!-- Screen Capture -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Screen Capture</div><small>اشتراک صفحه</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="captureScreen">شروع</button><button id="stopScreen">توقف</button></div>
+                        </div>
+                        <!-- Web Share -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Web Share</div><small>اشتراک محتوا</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="webShare">نمایش دیالوگ</button></div>
+                        </div>
+                        <!-- Wake Lock -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Wake Lock</div><small>نگهداری صفحه فعال</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqWake">درخواست</button><button id="releaseWake">آزادسازی</button></div>
+                        </div>
+                        <!-- Vibration -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Vibration</div><small>الگوریتم لرزش</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="vibrate">لرزش</button></div>
+                        </div>
+                        <!-- Bluetooth -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Bluetooth</div><small>درخواست دستگاه</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqBluetooth">کشف دستگاه</button></div>
+                        </div>
+                        <!-- WebUSB -->
+                        <div class="control">
+                            <div><div style="font-weight:700">WebUSB</div><small>درخواست دستگاه USB</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqUSB">درخواست USB</button></div>
+                        </div>
+                        <!-- WebSerial -->
+                        <div class="control">
+                            <div><div style="font-weight:700">WebSerial</div><small>درخواست پورت سریال</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqSerial">درخواست پورت</button></div>
+                        </div>
+                        <!-- WebAuthn -->
+                        <div class="control">
+                            <div><div style="font-weight:700">WebAuthn</div><small>ساخت اعتبارنامه</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqWebAuthn">شروع</button></div>
+                        </div>
+                        <!-- Payment -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Payment Request</div><small>دیالوگ پرداخت</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqPayment">درخواست</button></div>
+                        </div>
+                        <!-- Locks API -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Locks API</div><small>قفل محلی</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="reqLock">درخواست قفل</button></div>
+                        </div>
+                        <!-- Beacon -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Beacon</div><small>ارسال beacon</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="sendBeacon">ارسال نمونه</button></div>
+                        </div>
+                        <!-- Credential Management -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Credential Management</div><small>دریافت/ذخیره</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="getCred">دریافت</button><button id="storeCred">ذخیره</button></div>
+                        </div>
+                        <!-- Service Worker Guide -->
+                        <div class="control">
+                            <div><div style="font-weight:700">Background Sync</div><small>راهنما</small></div>
+                            <div style="display:flex;flex-direction:column;gap:8px"><button id="swGuide">نمایش راهنما</button></div>
+                        </div>
+                    </div>
+
+                    <div class="log" id="log" aria-live="polite">شروع لاگ...</div>
+                </section>
+
+                <aside class="side">
+                    <h4>وضعیت مجوزها و امکانات</h4>
+                    <div class="perm-list" id="permList" aria-live="polite"></div>
+
+                    <div class="tips">
+                        <strong>نکات مهم</strong>
+                        <ul>
+                            <li>بعضی از APIها (Bluetooth, USB, Serial, File System, Wake Lock, WebAuthn) تنها در HTTPS یا محیط‌های خاص کار می‌کنند.</li>
+                            <li>جاوااسکریپت نمی‌تواند اغلب مجوزها را از راه دور لغو کند؛ کاربر باید از تنظیمات مرورگر استفاده کند.</li>
+                            <li>این پنل به عنوان ابزار آموزشی طراحی شده — برای ادغام در محصول واقعی، نیاز به سیاست‌های سرور و مستندسازی دارید.</li>
+                        </ul>
+                    </div>
+
+                    <div style="display:flex;gap:8px;flex-direction:column">
+                        <button id="exportAll" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">صادرات تمام وضعیت‌ها</button>
+                        <button id="clearAllLocal" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">پاک‌سازی محلی</button>
+                        <button id="revokeInstructions" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">نحوهٔ لغو مجوزها</button>
+                    </div>
+                </aside>
+            </div>
+
+            <footer>
+                <div>نسخهٔ پیشرفتهٔ پنل محرمانگی — برای ادغام با اپ واقعی نیاز به HTTPS و تنظیمات سروری است.</div>
+                <div>ساخته شده توسط shahryaar3590</div>
+            </footer>
         </div>
-        <div>
-          <button id="exportBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer">صادرات JSON</button>
-        </div>
-      </header>
-
-      <div class="layout">
-        <section class="main-panel">
-          <h3>ابزارها و تست‌های سندباکس — همهٔ دسترسی‌های قابل فکر</h3>
-          <p style="color:var(--muted)">این پنل به صورت نمونه‌ای همهٔ عملیات خواندنی و نوشتنی که ممکن است در سندباکس مرورگر رخ دهند را امتحان می‌کند یا راهنمایی مرتبط را نمایش می‌دهد. بسیاری از APIها برای اجرا نیاز به HTTPS / user gesture دارند.</p>
-
-          <div class="controls" aria-hidden="false">
-
-            <!-- previous controls (geo/cam/mic/clipboard/files/notifications/storage/motion/fingerprint) kept -->
-
-            <div class="control">
-              <div><div style="font-weight:700">Geolocation</div><small>خواندن موقعیت</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqGeo">درخواست</button><button id="clearGeo">پاک سازی نمایش</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Camera / Microphone</div><small>استریم و توقف</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqCam">دوربین</button><button id="reqMic">میکروفون</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Clipboard</div><small>خواندن و نوشتن</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="readClip">خواندن</button><button id="writeClip">نوشتن</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">File System Access</div><small>باز / ذخیره (در صورت پشتیبانی)</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="openFile">باز کردن فایل</button><button id="saveFile">ذخیره فایل</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Notifications / Push</div><small>درخواست و نمایش نمونه</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqNotif">درخواست اعلان</button><button id="showNotif">نمایش نمونه</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Storage (localStorage / indexedDB)</div><small>نمایش و پاک‌سازی محلی</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="showStorage">نمایش</button><button id="clearStorage">پاک‌سازی</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Sensors (Motion / Orientation)</div><small>در صورت پشتیبانی</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqMotion">درخواست سنسور</button><button id="stopMotion">توقف</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Fingerprinting</div><small>Canvas / Audio — قابل مخفی‌سازی</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="showFP">محاسبه</button><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="maskSensitive"> مخفی‌سازی</label></div>
-            </div>
-
-            <!-- new advanced APIs -->
-            <div class="control">
-              <div><div style="font-weight:700">Screen Capture</div><small>getDisplayMedia (اشتراک صفحه)</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="captureScreen">شروع ضبط صفحه</button><button id="stopScreen">توقف ضبط</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Web Share</div><small>اشتراک محتوای محلی</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="webShare">نشان دادن دیالوگ اشتراک</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Wake Lock</div><small>نگهداری صفحه فعال</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqWake">درخواست WakeLock</button><button id="releaseWake">آزادسازی</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Vibration</div><small>الگوریتم لرزش (در صورت پشتیبانی)</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="vibrate">لرزش</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Bluetooth</div><small>درخواست دستگاه بلوتوث</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqBluetooth">کشف دستگاه</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">WebUSB</div><small>درخواست دستگاه USB</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqUSB">درخواست USB</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">WebSerial</div><small>درخواست پورت سریال</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqSerial">درخواست پورت</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">WebAuthn</div><small>ساخت/درخواست اعتبارنامهٔ عمومی</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqWebAuthn">شروع WebAuthn</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Payment Request</div><small>دیالوگ پرداخت نمونه</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqPayment">درخواست پرداخت (نمونه)</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Locks API</div><small>قفل محلی (navigator.locks)</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="reqLock">درخواست قفل</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Beacon</div><small>ارسال beacon (sendBeacon)</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="sendBeacon">ارسال نمونه</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Credential Management</div><small>دریافت/ذخیره اعتبارنامه</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="getCred">دریافت Credential</button><button id="storeCred">ذخیره Credential نمونه</button></div>
-            </div>
-
-            <div class="control">
-              <div><div style="font-weight:700">Background Sync / Push (راهنما)</div><small>نیاز به Service Worker و سرور</small></div>
-              <div style="display:flex;flex-direction:column;gap:8px"><button id="swGuide">نمایش راهنما</button></div>
-            </div>
-
-          </div>
-
-          <div class="log" id="log" aria-live="polite">شروع لاگ...
-          </div>
-
-        </section>
-
-        <aside class="side">
-          <h4>وضعیت مجوزها و امکانات</h4>
-          <div class="perm-list" id="permList" aria-live="polite"></div>
-
-          <div class="tips"><strong>نکات مهم</strong><ul>
-            <li>بعضی از APIها (Bluetooth, USB, Serial, File System, Wake Lock, WebAuthn) تنها در HTTPS یا محیط‌های خاص/پلتفرم‌های پشتیبانی‌شده کار می‌کنند.</li>
-            <li>جاوااسکریپت نمی‌تواند اغلب مجوزها را از راه دور لغو کند؛ کاربر باید از تنظیمات مرورگر استفاده کند.</li>
-            <li>این پنل به عنوان ابزار آموزشی طراحی شده — برای ادغام در محصول واقعی، نیاز به سیاست‌های سرور و مستندسازی دارید.</li>
-          </ul></div>
-
-          <div style="display:flex;gap:8px;flex-direction:column">
-            <button id="exportAll" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">صادرات تمام وضعیت‌ها</button>
-            <button id="clearAllLocal" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">پاک‌سازی محلی</button>
-            <button id="revokeInstructions" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer">نحوهٔ لغو مجوزها</button>
-          </div>
-        </aside>
-      </div>
-
-      <footer>
-        <div>نسخهٔ پیشرفتهٔ پنل محرمانگی — برای ادغام با اپ واقعی نیاز به HTTPS و تنظیمات سروری است.</div>
-        <div>می‌خواهی من کد محصول خودت را در این قالب ادغام کنم؟</div>
-      </footer>
     </div>
-  </div>
 
-  <script>
-    // جامع‌ترین لیست دسترسی‌ها و عملیات — با پیامدهای واقعی و fallback
-    const logEl = document.getElementById('log');
-    function log(...args){ const s = args.map(a=> (typeof a==='string'? a : JSON.stringify(a))).join(' '); logEl.textContent = new Date().toLocaleTimeString() + ' — ' + s + '
-' + logEl.textContent; }
-
-    const perms = {
-      geolocation:'unknown', camera:'unknown', microphone:'unknown', notifications:'unknown', clipboardRead:'unknown', clipboardWrite:'unknown', filesystem:'unknown', motion:'unknown', storagePersistent:'unknown', screenCapture:'unknown', webShare:'unknown', wakeLock:'unknown', vibration:'unknown', bluetooth:'unknown', usb:'unknown', serial:'unknown', webauthn:'unknown', payment:'unknown', locks:'unknown', beacon:'unknown', credentials:'unknown'
-    };
-
-    const maskCheckbox = document.getElementById('maskSensitive');
-    let maskSensitive = false; if(maskCheckbox) maskCheckbox.addEventListener('change', e=>{ maskSensitive = e.target.checked; renderPerms(); });
-
-    async function safeQuery(name){ try{ if(!navigator.permissions) return 'unsupported'; const s = await navigator.permissions.query({name}); return s.state; }catch(e){ return 'unsupported'; } }
-
-    async function probeAll(){
-      // query a set of known permission names where possible
-      perms.geolocation = await safeQuery('geolocation');
-      perms.camera = await safeQuery('camera');
-      perms.microphone = await safeQuery('microphone');
-      perms.notifications = await safeQuery('notifications');
-      perms.clipboardRead = await safeQuery('clipboard-read');
-      perms.clipboardWrite = await safeQuery('clipboard-write');
-      // storage
-      perms.storagePersistent = (navigator.storage && navigator.storage.persist) ? (await (navigator.storage.persisted ? navigator.storage.persisted() : Promise.resolve(false))) : 'unsupported';
-      // other capabilities
-      perms.filesystem = (window.showOpenFilePicker || window.showSaveFilePicker) ? 'available' : 'unsupported';
-      perms.screenCapture = (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) ? 'available' : 'unsupported';
-      perms.webShare = (navigator.share) ? 'available' : 'unsupported';
-      perms.wakeLock = (navigator.wakeLock) ? 'available' : 'unsupported';
-      perms.bluetooth = (navigator.bluetooth) ? 'available' : 'unsupported';
-      perms.usb = (navigator.usb) ? 'available' : 'unsupported';
-      perms.serial = (navigator.serial) ? 'available' : 'unsupported';
-      perms.webauthn = (window.PublicKeyCredential) ? 'available' : 'unsupported';
-      perms.payment = (window.PaymentRequest) ? 'available' : 'unsupported';
-      perms.locks = (navigator.locks) ? 'available' : 'unsupported';
-      perms.beacon = (navigator.sendBeacon) ? 'available' : 'unsupported';
-      perms.credentials = (navigator.credentials) ? 'available' : 'unsupported';
-      perms.motion = (typeof DeviceMotionEvent !== 'undefined') ? 'available' : 'unsupported';
-      renderPerms(); log('probe finished');
+    <script type="importmap">
+    {
+        "imports": {
+            "./js/": "./js/"
+        }
     }
+    </script>
 
-    function renderPerms(){
-      const permList = document.getElementById('permList'); permList.innerHTML = '';
-      for(const [key, state] of Object.entries(perms)){
-        const row = document.createElement('div'); row.className = 'perm';
-        const left = document.createElement('div'); left.className='meta';
-        const chip = document.createElement('div'); chip.className='chip '+(state==='granted'?'granted':'denied'); chip.textContent = key.charAt(0).toUpperCase();
-        left.appendChild(chip);
-        const txt = document.createElement('div'); txt.innerHTML = `<strong>${key}</strong><div style="font-size:12px;color:${state==='granted'?'#bfe6d8': 'var(--muted)'}">${maskSensitive && (key.includes('clipboard') || key==='filesystem') ? 'مخفی' : state}</div>`;
-        left.appendChild(txt);
-        const right = document.createElement('div'); const btn = document.createElement('button'); btn.textContent='عملیات'; btn.addEventListener('click', ()=>handlePermAction(key)); right.appendChild(btn);
-        row.appendChild(left); row.appendChild(right); permList.appendChild(row);
-      }
-    }
+    <script type="module">
+        import { permissions, renderPermissions, probeAllPermissions } from './js/permissions.js';
+        import { logMessage } from './js/apis.js';
+        import { setupEventListeners, initMotionListener } from './js/ui.js';
 
-    // action handlers
-    async function handlePermAction(key){
-      try{
-        if(key==='geolocation'){
-          navigator.geolocation.getCurrentPosition(pos=>{ log('Geolocation:', pos.coords.latitude, pos.coords.longitude); perms.geolocation='granted'; renderPerms(); }, err=>{ log('Geolocation denied'); perms.geolocation='denied'; renderPerms(); });
+        // مقداردهی اولیه
+        const maskCheckbox = document.getElementById('maskSensitive');
+        let maskSensitive = false;
+        
+        if (maskCheckbox) {
+            maskCheckbox.addEventListener('change', e => {
+                maskSensitive = e.target.checked;
+                renderPermissions(maskSensitive);
+            });
         }
-        else if(key==='camera'){
-          try{ const s = await navigator.mediaDevices.getUserMedia({video:true}); log('Camera stream started'); s.getTracks().forEach(t=>t.stop()); perms.camera='granted'; renderPerms(); }catch(e){ log('Camera denied'); perms.camera='denied'; renderPerms(); }
-        }
-        else if(key==='microphone'){
-          try{ const s = await navigator.mediaDevices.getUserMedia({audio:true}); log('Microphone started'); s.getTracks().forEach(t=>t.stop()); perms.microphone='granted'; renderPerms(); }catch(e){ log('Microphone denied'); perms.microphone='denied'; renderPerms(); }
-        }
-        else if(key==='clipboardRead'){
-          try{ const t = await navigator.clipboard.readText(); log('Clipboard read:', maskSensitive ? '<<masked>>' : t); perms.clipboardRead='granted'; renderPerms(); }catch(e){ log('Clipboard read failed'); perms.clipboardRead='denied'; renderPerms(); }
-        }
-        else if(key==='clipboardWrite'){
-          try{ await navigator.clipboard.writeText('نمونه از رابط'); log('Clipboard write OK'); perms.clipboardWrite='granted'; renderPerms(); }catch(e){ log('Clipboard write failed'); perms.clipboardWrite='denied'; renderPerms(); }
-        }
-        else if(key==='filesystem'){
-          if(window.showOpenFilePicker){ try{ const [h] = await window.showOpenFilePicker(); const f = await h.getFile(); const txt = await f.text(); log('File opened, length:', txt.length); perms.filesystem='granted'; renderPerms(); }catch(e){ log('File open cancelled or denied'); perms.filesystem='denied'; renderPerms(); } } else { log('File System API unsupported'); }
-        }
-        else if(key==='notifications'){
-          try{ const p = await Notification.requestPermission(); perms.notifications = p; renderPerms(); log('Notifications permission:', p); }catch(e){ log('Notifications request failed'); perms.notifications='denied'; renderPerms(); }
-        }
-        else if(key==='storagePersistent'){
-          if(navigator.storage && navigator.storage.persist){ const ok = await navigator.storage.persist(); perms.storagePersistent = ok ? 'granted' : 'denied'; renderPerms(); log('persistent storage:', ok); } else { log('Persistent Storage unsupported'); }
-        }
-        else if(key==='screenCapture'){
-          try{ const s = await navigator.mediaDevices.getDisplayMedia({video:true}); log('Screen capture started'); s.getTracks().forEach(t=>t.stop()); perms.screenCapture='granted'; renderPerms(); }catch(e){ log('Screen capture failed/denied'); perms.screenCapture='denied'; renderPerms(); }
-        }
-        else if(key==='webShare'){
-          try{ await navigator.share({title:'نمونه',text:'اشتراک از طریق Web Share',url:location.href}); log('Shared via Web Share'); perms.webShare='granted'; renderPerms(); }catch(e){ log('Web Share cancelled/unsupported', e); perms.webShare='denied'; renderPerms(); }
-        }
-        else if(key==='wakeLock'){
-          try{ if(navigator.wakeLock){ window._wakeLock = await navigator.wakeLock.request('screen'); log('WakeLock acquired'); perms.wakeLock='granted'; renderPerms(); window._wakeLock.addEventListener('release', ()=>{ log('WakeLock released'); perms.wakeLock='unknown'; renderPerms(); }); } else { log('WakeLock unsupported'); perms.wakeLock='unsupported'; renderPerms(); } }catch(e){ log('WakeLock error', e); perms.wakeLock='denied'; renderPerms(); }
-        }
-        else if(key==='vibration'){
-          try{ if(navigator.vibrate){ navigator.vibrate([200,100,200]); log('Vibration called'); perms.vibration='granted'; renderPerms(); }else{ log('Vibration unsupported'); perms.vibration='unsupported'; renderPerms(); } }catch(e){ log('Vibration failed', e); perms.vibration='denied'; renderPerms(); }
-        }
-        else if(key==='bluetooth'){
-          try{ const device = await navigator.bluetooth.requestDevice({acceptAllDevices:true}); log('Bluetooth device:', device.name || 'unknown'); perms.bluetooth='granted'; renderPerms(); }catch(e){ log('Bluetooth request cancelled/failed'); perms.bluetooth='denied'; renderPerms(); }
-        }
-        else if(key==='usb'){
-          try{ const dev = await navigator.usb.requestDevice({filters:[]}); log('USB device:', dev.productName || 'unknown'); perms.usb='granted'; renderPerms(); }catch(e){ log('USB request cancelled/failed'); perms.usb='denied'; renderPerms(); }
-        }
-        else if(key==='serial'){
-          try{ const port = await navigator.serial.requestPort(); log('Serial port acquired'); perms.serial='granted'; renderPerms(); }catch(e){ log('Serial request cancelled/failed'); perms.serial='denied'; renderPerms(); }
-        }
-        else if(key==='webauthn'){
-          try{
-            if(window.PublicKeyCredential){
-              const challenge = Uint8Array.from(window.crypto.getRandomValues(new Uint8Array(32)));
-              const publicKey = { challenge, rp:{name:'Example'}, user:{id:Uint8Array.from([1,2,3,4]),name:'user@example.com',displayName:'User'}, pubKeyCredParams:[{type:'public-key',alg:-7}] };
-              const cred = await navigator.credentials.create({publicKey});
-              log('WebAuthn created:', !!cred);
-              perms.webauthn='granted'; renderPerms();
-            } else { log('WebAuthn unsupported'); perms.webauthn='unsupported'; renderPerms(); }
-          }catch(e){ log('WebAuthn error', e); perms.webauthn='denied'; renderPerms(); }
-        }
-        else if(key==='payment'){
-          try{
-            if(window.PaymentRequest){
-              const methodData = [{supportedMethods:'basic-card'}];
-              const details = {total:{label:'Total',amount:{currency:'USD',value:'0.01'}}};
-              const req = new PaymentRequest(methodData, details);
-              const resp = await req.show(); await resp.complete('fail'); log('Payment dialog shown'); perms.payment='granted'; renderPerms();
-            }else{ log('PaymentRequest unsupported'); perms.payment='unsupported'; renderPerms(); }
-          }catch(e){ log('Payment failed/cancelled'); perms.payment='denied'; renderPerms(); }
-        }
-        else if(key==='locks'){
-          try{ if(navigator.locks){ await navigator.locks.request('demo-lock', async ()=>{ log('lock held'); await new Promise(r=>setTimeout(r,500)); }); log('Locks API used'); perms.locks='granted'; renderPerms(); }else{ log('Locks unsupported'); perms.locks='unsupported'; renderPerms(); } }catch(e){ log('Locks error', e); perms.locks='denied'; renderPerms(); }
-        }
-        else if(key==='beacon'){
-          try{ const ok = navigator.sendBeacon && navigator.sendBeacon('/beacon-endpoint', JSON.stringify({t:Date.now()})); log('sendBeacon result:', !!ok); perms.beacon = ok ? 'sent' : 'unsupported'; renderPerms(); }catch(e){ log('Beacon failed', e); perms.beacon='denied'; renderPerms(); }
-        }
-        else if(key==='credentials'){
-          try{ if(navigator.credentials){ const c = await navigator.credentials.get({password:true}); log('Credential fetched:', !!c); perms.credentials='granted'; renderPerms(); } else { log('Credentials unsupported'); perms.credentials='unsupported'; renderPerms(); } }catch(e){ log('Credentials error', e); perms.credentials='denied'; renderPerms(); }
-        }
-      }catch(e){ log('action exception', e); }
-    }
 
-    // wire up specific buttons
-    document.getElementById('reqGeo').addEventListener('click', ()=>handlePermAction('geolocation'));
-    document.getElementById('reqCam').addEventListener('click', ()=>handlePermAction('camera'));
-    document.getElementById('reqMic').addEventListener('click', ()=>handlePermAction('microphone'));
-    document.getElementById('readClip').addEventListener('click', ()=>handlePermAction('clipboardRead'));
-    document.getElementById('writeClip').addEventListener('click', ()=>handlePermAction('clipboardWrite'));
-    document.getElementById('openFile').addEventListener('click', ()=>handlePermAction('filesystem'));
-    document.getElementById('saveFile').addEventListener('click', async ()=>{ if(window.showSaveFilePicker){ try{ const handle = await window.showSaveFilePicker({suggestedName:'privacy-report.txt'}); const w = await handle.createWritable(); await w.write('گزارش محرمانگی نمونه'); await w.close(); log('file saved'); }catch(e){ log('file save cancelled/failed'); } }else{ const blob = new Blob(['گزارش نمونه']); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='report.txt'; a.click(); URL.revokeObjectURL(url); log('download fallback'); } });
-    document.getElementById('reqNotif').addEventListener('click', ()=>handlePermAction('notifications'));
-    document.getElementById('showNotif').addEventListener('click', ()=>{ if(Notification && Notification.permission==='granted'){ new Notification('نمونه اعلان',{body:'این یک اعلان تستی است.'}); }else{ alert('ابتدا مجوز اعلان را بدهید.'); } });
-    document.getElementById('showStorage').addEventListener('click', ()=>{ log('localStorage:', Object.fromEntries(Object.entries(localStorage))); try{ const req = indexedDB.open('privacy_demo',1); req.onsuccess = e=>{ const db = e.target.result; const tx = db.transaction('items','readonly'); const store = tx.objectStore('items'); const r = store.getAll(); r.onsuccess = ()=> log('indexedDB items:', r.result); }; req.onerror = ()=> log('indexedDB open failed'); }catch(e){ log('indexedDB error', e);} );
-    document.getElementById('clearStorage').addEventListener('click', ()=>{ localStorage.clear(); const d = indexedDB.deleteDatabase('privacy_demo'); d.onsuccess = ()=> log('localStorage and indexedDB cleared'); d.onerror = ()=> log('failed to delete indexedDB'); });
-    document.getElementById('reqMotion').addEventListener('click', ()=>handlePermAction('motion'));
-    document.getElementById('stopMotion').addEventListener('click', ()=>{ window.removeEventListener('deviceorientation', motionHandler); log('motion stopped'); });
-    document.getElementById('showFP').addEventListener('click', async ()=>{ const c = getCanvasFingerprint(); const a = await getAudioFingerprint(); log('CanvasFP:', maskSensitive ? '<<masked>>' : c); log('AudioFP:', maskSensitive ? '<<masked>>' : a); });
+        // بررسی اولیه
+        await probeAllPermissions();
+        renderPermissions(maskSensitive);
+        logMessage('initial probe completed');
 
-    // advanced
-    document.getElementById('captureScreen').addEventListener('click', ()=>handlePermAction('screenCapture'));
-    document.getElementById('stopScreen').addEventListener('click', ()=>{ /* getDisplayMedia tracks are stopped in handler above */ log('Stop screen capture: stop tracks where active'); });
-    document.getElementById('webShare').addEventListener('click', ()=>handlePermAction('webShare'));
-    document.getElementById('reqWake').addEventListener('click', ()=>handlePermAction('wakeLock'));
-    document.getElementById('releaseWake').addEventListener('click', ()=>{ if(window._wakeLock){ window._wakeLock.release(); window._wakeLock = null; log('WakeLock released (manual)'); perms.wakeLock='unknown'; renderPerms(); } });
-    document.getElementById('vibrate').addEventListener('click', ()=>handlePermAction('vibration'));
-    document.getElementById('reqBluetooth').addEventListener('click', ()=>handlePermAction('bluetooth'));
-    document.getElementById('reqUSB').addEventListener('click', ()=>handlePermAction('usb'));
-    document.getElementById('reqSerial').addEventListener('click', ()=>handlePermAction('serial'));
-    document.getElementById('reqWebAuthn').addEventListener('click', ()=>handlePermAction('webauthn'));
-    document.getElementById('reqPayment').addEventListener('click', ()=>handlePermAction('payment'));
-    document.getElementById('reqLock').addEventListener('click', ()=>handlePermAction('locks'));
-    document.getElementById('sendBeacon').addEventListener('click', ()=>handlePermAction('beacon'));
-    document.getElementById('getCred').addEventListener('click', ()=>handlePermAction('credentials'));
-    document.getElementById('storeCred').addEventListener('click', async ()=>{ try{ if(navigator.credentials && navigator.credentials.store){ const cred = new PasswordCredential({id:'user@example.com',password:'sample'}); await navigator.credentials.store(cred); log('Credential stored (sample)'); }else{ log('Credential API unsupported'); } }catch(e){ log('storeCred failed', e); } });
-
-    document.getElementById('reqBluetooth').addEventListener('click', ()=>handlePermAction('bluetooth'));
-    document.getElementById('reqUSB').addEventListener('click', ()=>handlePermAction('usb'));
-    document.getElementById('reqSerial').addEventListener('click', ()=>handlePermAction('serial'));
-
-    document.getElementById('reqLock').addEventListener('click', ()=>handlePermAction('locks'));
-
-    document.getElementById('sendBeacon').addEventListener('click', ()=>handlePermAction('beacon'));
-
-    document.getElementById('swGuide').addEventListener('click', ()=>{ alert('برای Background Sync و Push نیاز به Service Worker و endpoint سرور دارید. معمولاً باید فایل sw.js را در ریشهٔ سایت تعریف کنید و از PushManager.subscribe در Service Worker استفاده کنید. این پنل فقط راهنما نمایش می‌دهد.'); });
-
-    document.getElementById('exportBtn').addEventListener('click', ()=>{
-      const data = {meta:{ua:navigator.userAgent,lang:navigator.language,ts:new Date().toISOString()},perms,localStorage:Object.fromEntries(Object.entries(localStorage))}; const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='privacy-status-advanced.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); log('Exported JSON');
-    });
-    document.getElementById('exportAll').addEventListener('click', ()=>document.getElementById('exportBtn').click());
-    document.getElementById('clearAllLocal').addEventListener('click', ()=>{ localStorage.clear(); indexedDB.deleteDatabase('privacy_demo'); log('Cleared local storage and tried to delete indexedDB'); });
-    document.getElementById('revokeInstructions').addEventListener('click', ()=>{ alert('برای لغو مجوزها: روی قفل کنار آدرس سایت در مرورگر کلیک کنید، یا به settings > site permissions بروید. جاوااسکریپت معمولاً مجوزها را مستقیماً revoke نمی‌کند.'); });
-
-    // helper: fingerprints
-    function getCanvasFingerprint(){ try{ const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); ctx.textBaseline='top'; ctx.font='16px sans-serif'; ctx.fillStyle='#f60'; ctx.fillRect(125,1,62,20); ctx.fillStyle='#069'; ctx.fillText('FingerprintTest',2,15); ctx.fillStyle='rgba(102,204,0,0.7)'; ctx.fillText('FingerprintTest',4,17); const fp = canvas.toDataURL(); return fp.substring(0,80); }catch(e){ return 'unknown'; } }
-    async function getAudioFingerprint(){ try{ const audioCtx = new (window.OfflineAudioContext||window.webkitOfflineAudioContext)(1,44100,44100); const osc = audioCtx.createOscillator(); osc.type='triangle'; osc.frequency.setValueAtTime(10000,audioCtx.currentTime); const comp = audioCtx.createDynamicsCompressor(); osc.connect(comp); comp.connect(audioCtx.destination); osc.start(0); const buf = await audioCtx.startRendering(); return buf.getChannelData(0).slice(0,10).join(','); }catch(e){ return 'unknown'; } }
-
-    // motion handler
-    function motionHandler(e){ log('deviceorientation alpha/beta/gamma:', e.alpha, e.beta, e.gamma); }
-    window.addEventListener('deviceorientation', motionHandler);
-
-    // initial probe
-    (async ()=>{ await probeAll(); renderPerms(); log('initial probe completed'); })();
-  </script>
+        // راه‌اندازی event listeners
+        setupEventListeners();
+        initMotionListener();
+    </script>
 </body>
 </html>

@@ -1,41 +1,21 @@
 {
-  "name": "آینه دسترسی‌های مرورگر",
-  "short_name": "Browser Permissions",
-  "description": "بررسی و نمایش وضعیت مجوزها و اطلاعات سیستم مرورگر",
-  "start_url": "/index-v2.html",
+  "name": "آینهٔ دسترسی‌های مرورگر",
+  "short_name": "دسترسی‌ها",
+  "description": "بررسی، درخواست و نمایش وضعیت مجوزها و اطلاعات سیستم",
+  "start_url": "/Main.html",
   "display": "standalone",
-  "background_color": "#667eea",
+  "background_color": "#071226",
   "theme_color": "#667eea",
-  "lang": "fa",
-  "dir": "rtl",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "categories": ["utilities", "productivity"],
-  "shortcuts": [
-    {
-      "name": "بررسی مجوزها",
-      "short_name": "مجوزها",
-      "description": "بررسی وضعیت مجوزهای مرورگر",
-      "url": "/index-v2.html#permissions"
-    },
-    {
-      "name": "اطلاعات سیستم",
-      "short_name": "سیستم",
-      "description": "مشاهده اطلاعات سیستم مرورگر",
-      "url": "/index-v2.html#systemInfo"
+      "type": "image/png"
     }
   ]
 }

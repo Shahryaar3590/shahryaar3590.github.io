@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>آینهٔ دسترسی‌های مرورگر</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>آینهٔ دسترسی‌های مرورگر</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style-v2.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            color: white;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+        .footer { text-align: center; margin-top: 2rem; color: var(--muted); }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>آینهٔ دسترسی‌های مرورگر</h1>
-    <p>بررسی، درخواست و نمایش وضعیت مجوزها و اطلاعات سیستم</p>
-  </header>
-
-  <main>
-    <section id="permissions">
-      <h2>مجوزها</h2>
-      <div id="permList"></div>
-    </section>
-
-    <section id="actions">
-      <h2>درخواست‌ها</h2>
-      <button onclick="requestGeo()">موقعیت</button>
-      <button onclick="requestClipboard()">کلیپ‌بورد</button>
-      <button onclick="requestCamera()">دوربین</button>
-      <video id="cameraView" autoplay playsinline width="320" height="240" style="margin-top:10px;"></video>
-    </section>
-
-    <section id="systemInfo">
-      <h2>اطلاعات سیستم مرورگر</h2>
-      <button onclick="showSystemInfo()">بررسی سیستم من</button>
-      <div id="infoOutput" style="margin-top:10px; font-family:monospace;"></div>
-    </section>
-
-    <section id="export">
-      <h2>صادرات</h2>
-      <button onclick="exportStatus()">ذخیره وضعیت</button>
-    </section>
-  </main>
-
-    <div style="text-align:center; margin-top:20px;">
-        <a href="index-v2.html" style="display:inline-block; padding:10px 20px; background:#667eea; color:white; text-decoration:none; border-radius:5px;">
-            🚀 رفتن به نسخه پیشرفته
-        </a>
+    <div class="container">
+        <div class="hero">
+            <h1>🔍 آینهٔ دسترسی‌های مرورگر</h1>
+            <p>بررسی، درخواست و نمایش وضعیت مجوزها و اطلاعات سیستم</p>
+            <a href="Main.html" class="cta-btn">🚀 رفتن به نسخه پیشرفته</a>
+        </div>
+        <div class="footer">
+            <small>ساخته شده توسط shahryaar3590</small>
+        </div>
     </div>
-  <footer>
-    <p>ساخته شده توسط shahryaar3590</p>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
