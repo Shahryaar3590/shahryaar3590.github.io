@@ -35,14 +35,29 @@ export async function checkPermission(name) {
 }
 
 export async function probeAllPermissions() {
+    // فقط مجوزهایی که در navigator.permissions پشتیبانی می‌شوند
     const permNames = [
-        'geolocation', 'camera', 'microphone', 'notifications',
-        'clipboard-read', 'clipboard-write'
+        'geolocation', 
+        'camera', 
+        'microphone', 
+        'notifications',
+        'clipboard-read',  // ← فقط این نسخه
+        'clipboard-write'  // ← فقط این نسخه
     ];
+    
     for (const name of permNames) {
-        permissions[name] = await checkPermission(name);
+        const state = await checkPermission(name);
+        // نگاشت به کلیدهای ساده‌تر
+        if (name === 'clipboard-read') {
+            permissions.clipboardRead = state;
+        } else if (name === 'clipboard-write') {
+            permissions.clipboardWrite = state;
+        } else {
+            permissions[name] = state;
+        }
     }
     
+    // سایر قابلیت‌ها
     if (navigator.storage && navigator.storage.persisted) {
         permissions.storagePersistent = await navigator.storage.persisted() ? 'granted' : 'denied';
     }
