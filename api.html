@@ -1,0 +1,102 @@
+<!-- api.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IP Information API</title>
+</head>
+<body>
+    <pre id="output">Loading...</pre>
+    <script>
+        // تابع برای گرفتن IP از سرویس‌های مختلف
+        async function getIPs() {
+            const services = [
+                'https://api.ipify.org?format=json',
+                'https://ifconfig.me/all.json',
+                'https://ipinfo.io/json'
+            ];
+            
+            let ipData = {};
+            
+            for (let service of services) {
+                try {
+                    const response = await fetch(service);
+                    const data = await response.json();
+                    ipData = { ...ipData, ...data };
+                } catch (e) {
+                    // اگر سرویسی کار نکرد، ادامه بده
+                }
+            }
+            
+            return ipData;
+        }
+        
+        // اطلاعات کامل مرورگر
+        function getBrowserInfo() {
+            return {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                languages: navigator.languages,
+                platform: navigator.platform,
+                hardwareConcurrency: navigator.hardwareConcurrency,
+                deviceMemory: navigator.deviceMemory || 'Unknown',
+                screen: {
+                    width: screen.width,
+                    height: screen.height,
+                    colorDepth: screen.colorDepth
+                },
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                timestamp: new Date().toISOString()
+            };
+        }
+        
+        // اطلاعات شبکه
+        function getNetworkInfo() {
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (connection) {
+                return {
+                    effectiveType: connection.effectiveType,
+                    rtt: connection.rtt,
+                    downlink: connection.downlink,
+                    saveData: connection.saveData
+                };
+            }
+            return { message: 'Network info not available' };
+        }
+        
+        // تابع اصلی برای جمع‌آوری همه اطلاعات
+        async function getAllInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const format = urlParams.get('format') || 'json';
+            const ipData = await getIPs();
+            const browserInfo = getBrowserInfo();
+            const networkInfo = getNetworkInfo();
+            
+            const allInfo = {
+                ip: ipData.ip || ipData.query || 'Unknown',
+                ...ipData,
+                browser: browserInfo,
+                network: networkInfo,
+                headers: {
+                    'User-Agent': navigator.userAgent,
+                    'Accept-Language': navigator.language,
+                }
+            };
+            
+            return { format, data: allInfo };
+        }
+        
+        // اجرا و نمایش
+        getAllInfo().then(({ format, data }) => {
+            if (format === 'text') {
+                // خروجی ساده برای curl
+                const output = `IP: ${data.ip}\nUser-Agent: ${data.browser.userAgent}\nLanguage: ${data.browser.language}\nTimezone: ${data.browser.timezone}\nTimestamp: ${data.browser.timestamp}`;
+                document.getElementById('output').textContent = output;
+            } else {
+                // خروجی JSON
+                document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+    </script>
+</body>
+</html>
